@@ -78,7 +78,7 @@ def adjust_results4_isadog(results_dic, dogfile):
             if dog_breed not in dogbreeds_dic:
                 dogbreeds_dic[dog_breed] = 1
 
-    for key, result_list in results_dic.items():
+    for result_list in results_dic.values():
         # check pet image label matches dog name from file meaning pet is a dog
         pet_label = result_list[0].lower()
         pet_label_match = 1 if pet_label in dogbreeds_dic else 0
@@ -87,4 +87,4 @@ def adjust_results4_isadog(results_dic, dogfile):
         classifier_label = result_list[1].lower()
         classifier_label_match = 1 if classifier_label in dogbreeds_dic else 0
 
-        results_dic[key].extend([pet_label_match, classifier_label_match])
+        result_list.extend([pet_label_match, classifier_label_match])

@@ -20,8 +20,10 @@
 #           of the pet and classifier labels as the item at index 2 of the list.
 #
 ##
-# Imports classifier function for using CNN to classify images 
-from classifier import classifier 
+# Imports classifier function for using CNN to classify images
+from os import path
+from classifier import classifier
+
 
 # TODO 3: Define classify_images function below, specifically replace the None
 #       below by the function definition of the classify_images function. 
@@ -65,20 +67,20 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    for image_filename in results_dic:
+    for image_filename, result_list in results_dic.items():
         model_label = ""
 
         # Get the full path for the image file
-        image_file_path = images_dir + image_filename
+        image_file_path = path.join(images_dir, image_filename)
         
         # Use the classifier function to classify the image and format the label
         model_label = classifier(image_file_path, model).lower().strip()
         
         # Pet image label (truth) from results_dic
-        truth = results_dic[image_filename][0]
+        truth = result_list[0]
         
         # Determine if the pet label is in the classifier label
         if truth in model_label:
-            results_dic[image_filename].extend([model_label, 1])
+            result_list.extend([model_label, 1])
         else:
-            results_dic[image_filename].extend([model_label, 0]) 
+            result_list.extend([model_label, 0]) 

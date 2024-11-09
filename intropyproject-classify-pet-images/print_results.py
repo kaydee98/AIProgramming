@@ -82,7 +82,7 @@ def print_results(results_dic, results_stats_dic, model,
           != results_stats_dic['n_images'] ) 
        ):
         print("\nINCORRECT Dog/NOT Dog Assignments:")
-        for key, value in results_dic.items():
+        for value in results_dic.values():
             # Pet Image Label is a Dog - Classified as NOT-A-DOG -OR- 
             # Pet Image Label is NOT-a-Dog - Classified as a-DOG
             # Check by sum of the pet image is a dog and classified as a dog should be 1 implying misclassified
@@ -95,7 +95,7 @@ def print_results(results_dic, results_stats_dic, model,
        ):
         print("\nINCORRECT Dog Breed Assignment:")
 
-        for key, value in results_dic.items():
+        for value in results_dic.values():
             # Check if both are dogs but breed doesn't match
             # Pet Image Label is-a-Dog, classified as-a-dog but is WRONG breed
             if ( sum(value[3:]) == 2 and
